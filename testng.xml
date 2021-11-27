@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Agile Travel Project Test Suite" thread-count="4" parallel="tests" >
+
+	<listeners>
+	     <listener class-name="ultilities.TestListener"/>
+	     <listener class-name="ultilities.TestRetryAnalyzerListener"/>
+	</listeners>
+
+	  <test name="Test - Edge" thread-count="2" parallel="methods">
+	  	<parameter name="browser" value="edge" />
+	  	<parameter name="url" value="http://travel.agileway.net" />
+
+	    <classes>
+	      <class name="testcase.Login_Test"/>
+	      <class name="testcase.Payment_Test"/>
+	    </classes>
+	  </test>
+
+    <test name="Test - Chrome" thread-count="2" parallel="methods">
+	  	<parameter name="browser" value="chrome" />
+		<parameter name="url" value="http://travel.agileway.net" />
+
+	    <classes>
+	      <class name="testcase.Login_Test"/>
+	      <class name="testcase.Payment_Test"/>
+	    </classes>
+  	</test>
+
+</suite> <!-- Suite -->
