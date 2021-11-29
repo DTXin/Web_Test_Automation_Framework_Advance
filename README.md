@@ -20,6 +20,7 @@ This sample using the following libraries and frameworks:
 - Retry a test case fail/skip.
 - Cross Browser Testing through different browser like Firefox, Chrome, Edge, Safari.
 - Cross Platform Testing on any of the popular operating systems like Windows, macOS, iOS and Android.
+- Create Bug / Defect automatically in JIRA
 
 # Parallel testing
 - The parallel test execution is based on the parallel tests feature on TestNG. This is used by `testng.xml` test suite file which has the `parallel="tests"` attribute and value, whereas test item inside the test suite will execute in parallel.
@@ -67,3 +68,12 @@ mvn clean test -Dsurefire.suiteXmlFiles=testng_browserstack.xml
 
 ![Cross Platform Testing with Browserstack](https://github.com/DTXin/Web_Test_Automation_Framework_Advance/blob/master/Reports/Image/Browserstack_build.png)
 
+# JIRA - Defect tracking tools
+- File `JiraManager.java` in folder `src/main/java/ultilities` will connect to JIRA by using Jira Rest API.
+- When have a test case return failure. We will create a issue about test case's bug and log defects in JIRA.
+
+![Creatae A Issue](https://github.com/DTXin/Web_Test_Automation_Framework_Advance/blob/master/Reports/Image/Intergrate%20with%20Jira_Image1.png)
+
+- Add attachment include: information of a issue and ccreenshot of failed Test Case to JIRA Issue.
+
+![Creatae A Issue](https://github.com/DTXin/Web_Test_Automation_Framework_Advance/blob/master/Reports/Image/Intergrate%20with%20Jira_Image2.png)
