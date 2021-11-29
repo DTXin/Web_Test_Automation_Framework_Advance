@@ -19,6 +19,7 @@ public class TestListener implements ITestListener {
 
 	public static ExtentReports extentReport;
 	public static ExtentTest extentTest;
+	public static JiraManager jiraOps;
 	
 	@Override
 	public void onTestStart(ITestResult result) {
@@ -48,13 +49,29 @@ public class TestListener implements ITestListener {
 		ExtentFactory.getInstance().getExtent().log(Status.FAIL, "Test Case is Fail");
 		ExtentFactory.getInstance().getExtent().log(Status.FAIL, result.getThrowable());
 		
+		String screenshotPath = "";
 		// Add screenshot for failed test
 		try {
-			extentTest.addScreenCaptureFromPath(TestUtilities.captureScreenshot(result.getName()), "Test case failure screenshot");
+			screenshotPath = TestUtilities.captureScreenshot(result.getName());
+			extentTest.addScreenCaptureFromPath(screenshotPath, "Test case failure screenshot");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		ExtentFactory.getInstance().removeExtent();
+		
+		// Jira practice
+		jiraOps = new JiraManager();
+		String issueS = "Automation Test Failed - "+ result.getMethod().getMethodName();
+		String issueDescription = "Exception details: " + result.getThrowable().toString();
+		String key = "";
+
+		try {
+			key = jiraOps.createIssue(issueS, "10000", "Bug", issueDescription, "61a32637744c4d0069ea15b5", "61a32637744c4d0069ea15b5");
+			System.out.println(key);
+			jiraOps.addAttachmentToJiraIssue(key, screenshotPath);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

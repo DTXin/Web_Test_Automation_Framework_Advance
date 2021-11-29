@@ -32,6 +32,6 @@ public class AbstractTest extends AbstractPage {
 
 	@AfterMethod
 	public void closeDriver() {
-		DriverFactory.getInstance().closeDriver();
+		DriverFactory.getInstance().getDriver().quit();
 	}
 }
